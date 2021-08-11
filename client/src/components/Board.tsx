@@ -1,66 +1,54 @@
 import './Board.css';
-import {
-    useEffect,
-    useState,
-    useRef,
-    useCallback,
-    KeyboardEventHandler
-} from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useInterval } from './../util/useInterval';
-import { borderCheck, initSnake, moveTo } from './../util/helper';
-
-export enum DIR {
-    UP,
-    LEFT,
-    DOWN,
-    RIGHT,
-    STOP
-}
-
-export const BOX_SIZE = 25;
-export const BORDER_SIZE = 20;
-export const SPEED = 25;
-export const DELAY = 100;
+import {
+    initSnake,
+    moveTo,
+    keyInputActions,
+    generateRandomApple
+} from './../util/helper';
+import { Apple, Snake, SnakePoint } from '../type';
+import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../config/init';
+import { BORDER_SIZE, BOX_COUNTY } from './../config/init';
+import Header from './Header';
 
 const Board = () => {
     const boardRef = useRef<HTMLDivElement>(null);
 
-    const [dir, setDir] = useState(DIR.STOP);
-    const dirRef = useRef(dir);
-    const [x, setX] = useState<number | null>(0);
-    const [y, setY] = useState(0);
-    const [snakePoints, setSnake] = useState<number[][]>([]);
+    const [dir, setDir] = useState<DIR>(DIR.DOWN);
+    const [head, setHead] = useState<SnakePoint>([]);
+    const [snakePoints, setSnake] = useState<Snake>([]);
+    const [apple, setApple] = useState<Apple>([]);
+    const [inputDisabled, setInputDisabled] = useState<boolean>(false);
 
     function keyPressed(e: any) {
-        console.log(dir);
-        if (e.key === 'ArrowLeft') {
-            setDir(DIR.LEFT);
+        if (!inputDisabled) {
+            keyInputActions(dir, setDir, e);
         }
-        if (e.key === 'ArrowRight') {
-            setDir(DIR.RIGHT);
-        }
-        if (e.key === 'ArrowDown') {
-            setDir(DIR.DOWN);
-        }
-        if (e.key === 'ArrowUp') {
-            setDir(DIR.UP);
-        }
-        if (e.key === ' ') {
-            setDir(DIR.STOP);
-        }
+        setInputDisabled(true);
     }
 
-    borderCheck(x!, y!, boardRef.current!, setX, setY, setDir);
-
     useEffect(() => {
-        setX((boardRef.current!.clientWidth - BOX_SIZE) / 2 - 0.5 * BOX_SIZE);
-        setY((boardRef.current!.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE);
-        setSnake(initSnake(6, boardRef.current!));
+        initSnake(10, boardRef.current!, setHead, setSnake);
+        setApple(generateRandomApple(boardRef.current!));
         boardRef.current!.focus();
     }, []);
 
     useInterval(() => {
-        moveTo(dir, setX, setY, x!, y, snakePoints, setSnake);
+        moveTo(
+            dir,
+            head,
+            setHead,
+            snakePoints,
+            setSnake,
+            boardRef.current!,
+            setDir,
+            apple,
+            setApple
+        );
+        if (inputDisabled) {
+            setInputDisabled(false);
+        }
     }, DELAY);
 
     return (
@@ -68,14 +56,31 @@ const Board = () => {
             className="board"
             style={{
                 border: `${BORDER_SIZE}px solid black`,
-                width: `${BOX_SIZE * 60 + 2 * BORDER_SIZE}px`,
-                height: `${BOX_SIZE * 32 + 2 * BORDER_SIZE}px`,
+                width: `${~~(BOX_SIZE * BOX_COUNTX + 2 * BORDER_SIZE)}px`,
+                height: `${~~(BOX_SIZE * BOX_COUNTY + 2 * BORDER_SIZE)}px`,
                 margin: 'auto'
             }}
             ref={boardRef}
             tabIndex={0}
             onKeyDown={(e) => keyPressed(e)}
+            onKeyUp={(e) => {
+                if (e.key === ' ') {
+                    setDir(DIR.DOWN);
+                    initSnake(10, boardRef.current!, setHead, setSnake);
+                }
+            }}
         >
+            <div
+                style={{
+                    backgroundColor: apple[2] || undefined,
+                    borderRadius: '50%',
+                    position: 'absolute',
+                    width: BOX_SIZE,
+                    height: BOX_SIZE,
+                    left: apple[0],
+                    top: apple[1]
+                }}
+            ></div>
             {snakePoints.map(([x, y], i) => (
                 <div
                     key={`snake-body-${x}-${y}-${i}`}

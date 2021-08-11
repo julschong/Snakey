@@ -1,70 +1,99 @@
-import { BOX_SIZE, DIR, SPEED } from './../components/Board';
+import { KeyboardEvent } from 'react';
+import { Apple, Snake, SnakePoint } from './../type.d';
+import { BOX_COUNTX, BOX_COUNTY, BOX_SIZE, DIR, SPEED } from '../config/init';
+
+import _ from 'lodash';
 
 export const borderCheck = (
-    x: number,
-    y: number,
+    head: SnakePoint,
     board: HTMLDivElement,
-    setX: Function,
-    setY: Function,
-    setDir: Function
-): void => {
-    if (x && x > board.clientWidth - BOX_SIZE) {
-        setX(board.clientWidth - BOX_SIZE);
-        setDir(DIR.STOP);
+    snake: Snake
+): boolean => {
+    if (head[0] && head[0] > board.clientWidth - BOX_SIZE) {
+        return true;
     }
-    if (x && x < 0) {
-        setX(0);
-        setDir(DIR.STOP);
+    if (head[0] && head[0] < 0) {
+        return true;
     }
-    if (y && y > board.clientHeight - BOX_SIZE) {
-        setY(board.clientHeight - BOX_SIZE);
-        setDir(DIR.STOP);
+    if (head[1] && head[1] > board.clientHeight - BOX_SIZE) {
+        return true;
     }
-    if (y && y < 0) {
-        setY(0);
-        setDir(DIR.STOP);
+    if (head[1] && head[1] < 0) {
+        return true;
     }
+
+    for (let i = 1; i < snake.length; i++) {
+        const [headX, headY] = head;
+        const [checkX, checkY] = snake[i];
+        if (headX === checkX && headY === checkY) {
+            console.log('hit');
+            return true;
+        }
+    }
+
+    return false;
 };
 
 export const moveTo = (
     dir: DIR,
-    setX: Function,
-    setY: Function,
-    x: number,
-    y: number,
-    snake: number[][],
-    setSnake: Function
+    head: SnakePoint,
+    setHead: Function,
+    snake: Snake,
+    setSnake: Function,
+    board: HTMLDivElement,
+    setDir: Function,
+    apple: Apple,
+    setApple: Function
 ): void => {
+    if (borderCheck(head, board, snake)) {
+        return setDir(DIR.STOP);
+    }
+
     switch (dir) {
         case DIR.LEFT:
-            setX(x - SPEED);
+            setHead((s: SnakePoint) => [s[0]! - SPEED, s[1]!]);
             break;
         case DIR.RIGHT:
-            setX(x + SPEED);
+            setHead((s: SnakePoint) => [s[0]! + SPEED, s[1]!]);
             break;
         case DIR.UP:
-            setY(y - SPEED);
+            setHead((s: SnakePoint) => [s[0]!, s[1]! - SPEED]);
             break;
         case DIR.DOWN:
-            setY(y + SPEED);
+            setHead((s: SnakePoint) => [s[0]!, s[1]! + SPEED]);
     }
-    if (dir !== DIR.STOP) updateSnake(snake, x, y, setSnake);
+    if (dir !== DIR.STOP) {
+        updateSnake(snake, head, setSnake, apple, setApple, board);
+    }
 };
 
 export const updateSnake = (
-    snake: number[][],
-    x: number,
-    y: number,
-    setSnake: Function
+    snake: Snake,
+    head: SnakePoint,
+    setSnake: Function,
+    apple: Apple,
+    setApple: Function,
+    board: HTMLDivElement
 ): void => {
-    setSnake([[x, y], ...snake.slice(0, snake.length - 1)]);
+    if (_.isEqual(head, apple.slice(0, 2))) {
+        setSnake([head, ...snake]);
+        setApple(generateRandomApple(board));
+        return;
+    }
+    setSnake([head, ...snake.slice(0, snake.length - 1)]);
 };
 
 export const initSnake = (
     initLength: number,
-    board: HTMLDivElement
-): number[][] => {
-    let initArray: number[][] = [];
+    board: HTMLDivElement,
+    setHead: Function,
+    setSnake: Function
+) => {
+    let initArray: Snake = [];
+    setHead([
+        ~~((board.clientWidth - BOX_SIZE) / 2 - 0.5 * BOX_SIZE),
+        ~~((board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE)
+    ]);
 
     for (let i = 0; i < initLength; i++) {
         initArray.push([
@@ -73,5 +102,40 @@ export const initSnake = (
         ]);
     }
 
-    return initArray;
+    setSnake(initArray);
+};
+
+export const keyInputActions = (
+    dir: DIR,
+    setDir: Function,
+    e: KeyboardEvent
+) => {
+    if (e.key === 'ArrowLeft' && dir !== DIR.RIGHT && dir !== DIR.LEFT) {
+        setDir(DIR.LEFT);
+    } else if (
+        e.key === 'ArrowRight' &&
+        dir !== DIR.LEFT &&
+        dir !== DIR.RIGHT
+    ) {
+        setDir(DIR.RIGHT);
+    } else if (e.key === 'ArrowDown' && dir !== DIR.UP && dir !== DIR.DOWN) {
+        setDir(DIR.DOWN);
+    } else if (e.key === 'ArrowUp' && dir !== DIR.DOWN && dir !== DIR.UP) {
+        setDir(DIR.UP);
+    }
+};
+
+export const generateRandomApple = (board: HTMLDivElement): Apple => {
+    const x = Math.floor(Math.random() * BOX_COUNTX) * BOX_SIZE;
+    const y = Math.floor(Math.random() * BOX_COUNTY) * BOX_SIZE;
+
+    return [x, y, generateRandomColor()];
+};
+
+export const generateRandomColor = (): string => {
+    const r = ~~(Math.random() * 255);
+    const g = ~~(Math.random() * 255);
+    const b = ~~(Math.random() * 255);
+
+    return `rgb(${r},${g},${b})`;
 };
