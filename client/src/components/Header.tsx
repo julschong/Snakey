@@ -8,7 +8,7 @@ const Header = ({
     return (
         <header
             style={{
-                fontSize: 40,
+                fontSize: 60,
                 fontFamily: 'fantasy',
                 padding: 16,
                 color: 'white',
