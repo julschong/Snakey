@@ -4,7 +4,7 @@ import { KeyboardEvent } from 'react';
 import { Apple, Snake, SnakePoint } from './../type.d';
 import { BOX_COUNTX, BOX_COUNTY, BOX_SIZE, DIR, SPEED } from '../config/init';
 
-export const borderCheck = (
+const borderCheck = (
     head: SnakePoint,
     board: HTMLDivElement,
     snake: Snake
@@ -78,7 +78,7 @@ export const moveTo = (
     }
 };
 
-export const updateSnake = (
+const updateSnake = (
     snake: Snake,
     head: SnakePoint,
     setSnake: Function,
@@ -150,9 +150,9 @@ export const generateRandomApple = (board: HTMLDivElement): Apple => {
 };
 
 export const generateRandomColor = (): string => {
-    const r = ~~(Math.random() * 255);
-    const g = ~~(Math.random() * 255);
-    const b = ~~(Math.random() * 255);
+    const r = ~~(Math.random() * 300) - 45;
+    const g = ~~(Math.random() * 300) - 45;
+    const b = ~~(Math.random() * 300) - 45;
 
     return `rgb(${r},${g},${b})`;
 };
