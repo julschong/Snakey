@@ -6,10 +6,11 @@ import {
     moveTo,
     keyInputActions,
     generateRandomApple
-} from './../util/helper';
+} from './../util/gameLogic';
 import { Apple, Snake, SnakePoint } from '../type';
 import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../config/init';
 import { BORDER_SIZE, BOX_COUNTY } from './../config/init';
+import { headStyle } from './../util/snakeStyle';
 
 const Board = ({
     gameStart,
@@ -106,20 +107,23 @@ const Board = ({
                     top: apple[1]
                 }}
             ></div>
-            {snakePoints.map(([x, y], i) => (
-                <div
-                    key={`snake-body-${x}-${y}-${i}`}
-                    style={{
-                        backgroundColor: 'red',
-                        border: '1px solid black',
-                        width: BOX_SIZE,
-                        height: BOX_SIZE,
-                        position: 'absolute',
-                        left: x,
-                        top: y
-                    }}
-                />
-            ))}
+            {snakePoints.map(([x, y], i) => {
+                return (
+                    <div
+                        key={`snake-body-${x}-${y}-${i}`}
+                        style={{
+                            backgroundColor: ' #99ff99',
+                            border: '1px solid black',
+                            width: BOX_SIZE,
+                            height: BOX_SIZE,
+                            position: 'absolute',
+                            borderRadius: headStyle(dir, i),
+                            left: x,
+                            top: y
+                        }}
+                    />
+                );
+            })}
         </div>
     );
 };
