@@ -1,0 +1,25 @@
+.modal-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.name-form {
+    background-color: aliceblue;
+    font-size: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+}
+
+.name-form > * {
+    display: block;
+    font-size: xx-large;
+    width: 480px;
+}

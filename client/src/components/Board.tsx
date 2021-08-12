@@ -12,7 +12,13 @@ import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../config/init';
 import { BORDER_SIZE, BOX_COUNTY } from './../config/init';
 import Header from './Header';
 
-const Board = () => {
+const Board = ({
+    gameStart,
+    setGamePoints
+}: {
+    gameStart: boolean;
+    setGamePoints: Function;
+}) => {
     const boardRef = useRef<HTMLDivElement>(null);
 
     const [dir, setDir] = useState<DIR>(DIR.DOWN);
@@ -31,23 +37,31 @@ const Board = () => {
     useEffect(() => {
         initSnake(10, boardRef.current!, setHead, setSnake);
         setApple(generateRandomApple(boardRef.current!));
-        boardRef.current!.focus();
     }, []);
 
+    useEffect(() => {
+        if (gameStart) {
+            boardRef.current!.focus();
+        }
+    }, [gameStart]);
+
     useInterval(() => {
-        moveTo(
-            dir,
-            head,
-            setHead,
-            snakePoints,
-            setSnake,
-            boardRef.current!,
-            setDir,
-            apple,
-            setApple
-        );
-        if (inputDisabled) {
-            setInputDisabled(false);
+        if (gameStart) {
+            moveTo(
+                dir,
+                head,
+                setHead,
+                snakePoints,
+                setSnake,
+                boardRef.current!,
+                setDir,
+                apple,
+                setApple,
+                setGamePoints
+            );
+            if (inputDisabled) {
+                setInputDisabled(false);
+            }
         }
     }, DELAY);
 
@@ -61,12 +75,18 @@ const Board = () => {
                 margin: 'auto'
             }}
             ref={boardRef}
-            tabIndex={0}
+            tabIndex={1}
             onKeyDown={(e) => keyPressed(e)}
             onKeyUp={(e) => {
                 if (e.key === ' ') {
                     setDir(DIR.DOWN);
-                    initSnake(10, boardRef.current!, setHead, setSnake);
+                    initSnake(
+                        10,
+                        boardRef.current!,
+                        setHead,
+                        setSnake,
+                        setGamePoints
+                    );
                 }
             }}
         >

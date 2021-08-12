@@ -1,8 +1,8 @@
+import _ from 'lodash';
+
 import { KeyboardEvent } from 'react';
 import { Apple, Snake, SnakePoint } from './../type.d';
 import { BOX_COUNTX, BOX_COUNTY, BOX_SIZE, DIR, SPEED } from '../config/init';
-
-import _ from 'lodash';
 
 export const borderCheck = (
     head: SnakePoint,
@@ -43,7 +43,8 @@ export const moveTo = (
     board: HTMLDivElement,
     setDir: Function,
     apple: Apple,
-    setApple: Function
+    setApple: Function,
+    setGamePoints: Function
 ): void => {
     if (borderCheck(head, board, snake)) {
         return setDir(DIR.STOP);
@@ -63,7 +64,15 @@ export const moveTo = (
             setHead((s: SnakePoint) => [s[0]!, s[1]! + SPEED]);
     }
     if (dir !== DIR.STOP) {
-        updateSnake(snake, head, setSnake, apple, setApple, board);
+        updateSnake(
+            snake,
+            head,
+            setSnake,
+            apple,
+            setApple,
+            board,
+            setGamePoints
+        );
     }
 };
 
@@ -73,9 +82,11 @@ export const updateSnake = (
     setSnake: Function,
     apple: Apple,
     setApple: Function,
-    board: HTMLDivElement
+    board: HTMLDivElement,
+    setGamePoints: Function
 ): void => {
     if (_.isEqual(head, apple.slice(0, 2))) {
+        setGamePoints((score: number) => score + 1);
         setSnake([head, ...snake]);
         setApple(generateRandomApple(board));
         return;
@@ -87,7 +98,8 @@ export const initSnake = (
     initLength: number,
     board: HTMLDivElement,
     setHead: Function,
-    setSnake: Function
+    setSnake: Function,
+    setGamePoints?: Function
 ) => {
     let initArray: Snake = [];
     setHead([
@@ -100,6 +112,9 @@ export const initSnake = (
             (board.clientWidth - BOX_SIZE) / 2 - (i + 0.5) * BOX_SIZE,
             (board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE
         ]);
+    }
+    if (setGamePoints) {
+        setGamePoints(0);
     }
 
     setSnake(initArray);
