@@ -44,9 +44,11 @@ export const moveTo = (
     setDir: Function,
     apple: Apple,
     setApple: Function,
-    setGamePoints: Function
+    setGamePoints: Function,
+    setGameOver: Function
 ): void => {
     if (borderCheck(head, board, snake)) {
+        setGameOver(true);
         return setDir(DIR.STOP);
     }
 

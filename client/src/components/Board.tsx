@@ -10,14 +10,17 @@ import {
 import { Apple, Snake, SnakePoint } from '../type';
 import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../config/init';
 import { BORDER_SIZE, BOX_COUNTY } from './../config/init';
-import Header from './Header';
 
 const Board = ({
     gameStart,
-    setGamePoints
+    setGamePoints,
+    gameOver,
+    setGameOver
 }: {
     gameStart: boolean;
     setGamePoints: Function;
+    gameOver: boolean;
+    setGameOver: Function;
 }) => {
     const boardRef = useRef<HTMLDivElement>(null);
 
@@ -43,10 +46,10 @@ const Board = ({
         if (gameStart) {
             boardRef.current!.focus();
         }
-    }, [gameStart]);
+    }, [gameStart, gameOver]);
 
     useInterval(() => {
-        if (gameStart) {
+        if (gameStart && !gameOver) {
             moveTo(
                 dir,
                 head,
@@ -57,7 +60,8 @@ const Board = ({
                 setDir,
                 apple,
                 setApple,
-                setGamePoints
+                setGamePoints,
+                setGameOver
             );
             if (inputDisabled) {
                 setInputDisabled(false);
@@ -78,8 +82,9 @@ const Board = ({
             tabIndex={1}
             onKeyDown={(e) => keyPressed(e)}
             onKeyUp={(e) => {
-                if (e.key === ' ') {
+                if (e.key === ' ' && gameOver) {
                     setDir(DIR.DOWN);
+                    setGameOver(false);
                     initSnake(
                         10,
                         boardRef.current!,

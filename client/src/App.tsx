@@ -20,15 +20,22 @@ const App = () => {
                 position: 'relative'
             }}
         >
-            {!playerName && (
+            {(!playerName || gameOver) && (
                 <Modal
                     name={playerName}
                     setName={setPlayerName}
                     setGameStart={setGameStart}
+                    gameOver={gameOver}
+                    setGameOver={setGameOver}
                 />
             )}
             <Header name={playerName} gamePoints={gamePoints} />
-            <Board gameStart={gameStart} setGamePoints={setGamePoints} />
+            <Board
+                gameStart={gameStart}
+                setGamePoints={setGamePoints}
+                gameOver={gameOver}
+                setGameOver={setGameOver}
+            />
         </div>
     );
 };

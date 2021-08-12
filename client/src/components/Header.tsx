@@ -11,7 +11,8 @@ const Header = ({
                 fontSize: 40,
                 fontFamily: 'fantasy',
                 padding: 16,
-                backgroundColor: 'rgb(50,50,255)',
+                color: 'white',
+                backgroundColor: 'rgb(0, 102, 204)',
                 display: 'flex',
                 width: '100%',
                 justifyContent: 'space-around'

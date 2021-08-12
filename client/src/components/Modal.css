@@ -9,6 +9,17 @@
     z-index: 1;
 }
 
+.gameOver {
+    background-color: aliceblue;
+    font-size: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .name-form {
     background-color: aliceblue;
     font-size: 36px;
@@ -16,10 +27,11 @@
     flex-direction: column;
     justify-content: center;
     padding: 24px;
+    min-width: 37ch;
 }
 
 .name-form > * {
     display: block;
     font-size: xx-large;
-    width: 480px;
+    font-family: 'Courier New', Courier, monospace;
 }
