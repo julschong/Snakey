@@ -23,3 +23,5 @@ Current progression is:
  - [ ] Use Docker to host on AWS EC2 instance
 
 Current Progress:
+![Snakey](https://user-images.githubusercontent.com/71372051/129138174-3cb1f75d-aca4-41b3-85b4-3e7225f24ee0.gif)
+
