@@ -1,5 +1,8 @@
 FROM node:alpine
-COPY . /app
+COPY ./dist /app
+COPY package*.json ./
+RUN npm install
 WORKDIR /app
-CMD node hello.js
+EXPOSE 3003
+CMD node index.js
 
