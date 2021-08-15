@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { KeyboardEvent } from 'react';
 import { Apple, Snake, SnakePoint } from './../type.d';
 import { BOX_COUNTX, BOX_COUNTY, BOX_SIZE, DIR, SPEED } from '../config/init';
@@ -87,13 +85,23 @@ const updateSnake = (
     board: HTMLDivElement,
     setGamePoints: Function
 ): void => {
-    if (_.isEqual(head, apple.slice(0, 2))) {
+    if (ateApple(head, apple)) {
         setGamePoints((score: number) => score + 1);
         setSnake([head, ...snake]);
         setApple(generateRandomApple(board));
         return;
     }
     setSnake([head, ...snake.slice(0, snake.length - 1)]);
+};
+
+const ateApple = (head: SnakePoint, apple: Apple): boolean => {
+    if (
+        Math.abs(head[0]! - apple[0]!) < 3 &&
+        Math.abs(head[1]! - apple[1]!) < 3
+    ) {
+        return true;
+    }
+    return false;
 };
 
 export const initSnake = (
@@ -105,8 +113,12 @@ export const initSnake = (
 ) => {
     let initArray: Snake = [];
     setHead([
-        ~~((board.clientWidth - BOX_SIZE) / 2 - 0.5 * BOX_SIZE),
-        ~~((board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE)
+        Math.floor(
+            Math.floor(board.clientWidth - BOX_SIZE) / 2 - 0.5 * BOX_SIZE
+        ),
+        Math.floor(
+            Math.floor(board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE
+        )
     ]);
 
     for (let i = 0; i < initLength; i++) {

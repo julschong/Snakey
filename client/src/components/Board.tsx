@@ -64,6 +64,8 @@ const Board = ({
                 setGamePoints,
                 setGameOver
             );
+
+            // Disable input to reduce input delay when same key is repeatedly pressed
             if (inputDisabled) {
                 setInputDisabled(false);
             }
@@ -96,6 +98,7 @@ const Board = ({
                 }
             }}
         >
+            {/* Draws an Apple */}
             <div
                 style={{
                     backgroundColor: apple[2] || undefined,
@@ -107,6 +110,8 @@ const Board = ({
                     top: apple[1]
                 }}
             ></div>
+
+            {/* Below draws the snakes body onto the board */}
             {snakePoints.map(([x, y], i) => {
                 return (
                     <div

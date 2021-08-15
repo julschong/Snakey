@@ -39,9 +39,9 @@ const Ranking = ({
             <header className="ranking-header">Top 10!</header>
             {[...data, { name, score: gamePoints, current: true }]
                 .sort((a, b) => b.score - a.score)
-                .map((user) => (
+                .map((user, i) => (
                     <div
-                        key={user.name + user.score}
+                        key={user.name + user.score + i}
                         className="ranked-score"
                         style={{ fontWeight: user.current ? 900 : 400 }}
                     >
