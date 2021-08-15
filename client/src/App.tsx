@@ -27,6 +27,7 @@ const App = () => {
                     setGameStart={setGameStart}
                     gameOver={gameOver}
                     setGameOver={setGameOver}
+                    gamePoints={gamePoints}
                 />
             )}
             <Header name={playerName} gamePoints={gamePoints} />

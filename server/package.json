@@ -4,8 +4,8 @@
   "description": "",
   "main": "hello.js",
   "scripts": {
-    "start": "node ./dist/hello.js",
-    "dev": "nodemon ./dist/hello.js"
+    "start": "node ./dist/index.js",
+    "dev": "nodemon ./dist/index.js"
   },
   "keywords": [],
   "author": "Julius Lee",

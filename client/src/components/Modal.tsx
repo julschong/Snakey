@@ -8,6 +8,7 @@ interface ModalType {
     setGameStart: Function;
     gameOver: boolean;
     setGameOver: Function;
+    gamePoints: number;
 }
 
 const Modal = ({
@@ -15,7 +16,8 @@ const Modal = ({
     setName,
     setGameStart,
     gameOver,
-    setGameOver
+    setGameOver,
+    gamePoints
 }: ModalType) => {
     const submitted = (e: any) => {
         e.preventDefault();
@@ -47,8 +49,10 @@ const Modal = ({
             >
                 {gameOver ? (
                     <>
-                        <Ranking />
-                        <div className="gameOver">Press Space to Restart</div>
+                        <div className="gameOver">
+                            <Ranking gamePoints={gamePoints} name={name!} />
+                            <strong>Press Space to Restart</strong>
+                        </div>
                     </>
                 ) : (
                     <form className="name-form" onSubmit={submitted}>

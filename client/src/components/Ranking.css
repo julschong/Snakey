@@ -1,0 +1,13 @@
+.ranking-header {
+    font-weight: 900;
+    border-bottom: 3px solid black;
+    margin-bottom: 20px;
+}
+
+.ranked-score {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 40px;
+    align-items: center;
+    width: 100%;
+}
