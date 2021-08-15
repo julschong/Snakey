@@ -74,7 +74,7 @@ const Board = ({
 
     return (
         <div
-            className="board"
+            className="board animate__animated animate__fadeIn animate__delay-1s"
             style={{
                 border: `${BORDER_SIZE}px solid black`,
                 width: `${~~(BOX_SIZE * BOX_COUNTX + 2 * BORDER_SIZE)}px`,
@@ -112,7 +112,7 @@ const Board = ({
             ></div>
 
             {/* Below draws the snakes body onto the board */}
-            {snakePoints.map(([x, y], i) => {
+            {snakePoints.map(([x, y, direction], i) => {
                 return (
                     <div
                         key={`snake-body-${x}-${y}-${i}`}
@@ -122,7 +122,7 @@ const Board = ({
                             width: BOX_SIZE,
                             height: BOX_SIZE,
                             position: 'absolute',
-                            borderRadius: headStyle(dir, i),
+                            borderRadius: headStyle(direction!, i),
                             left: x,
                             top: y
                         }}

@@ -52,16 +52,16 @@ export const moveTo = (
 
     switch (dir) {
         case DIR.LEFT:
-            setHead((s: SnakePoint) => [s[0]! - SPEED, s[1]!]);
+            setHead((s: SnakePoint) => [s[0]! - SPEED, s[1]!, DIR.LEFT]);
             break;
         case DIR.RIGHT:
-            setHead((s: SnakePoint) => [s[0]! + SPEED, s[1]!]);
+            setHead((s: SnakePoint) => [s[0]! + SPEED, s[1]!, DIR.RIGHT]);
             break;
         case DIR.UP:
-            setHead((s: SnakePoint) => [s[0]!, s[1]! - SPEED]);
+            setHead((s: SnakePoint) => [s[0]!, s[1]! - SPEED, DIR.UP]);
             break;
         case DIR.DOWN:
-            setHead((s: SnakePoint) => [s[0]!, s[1]! + SPEED]);
+            setHead((s: SnakePoint) => [s[0]!, s[1]! + SPEED, DIR.DOWN]);
     }
     if (dir !== DIR.STOP) {
         updateSnake(
@@ -118,10 +118,19 @@ export const initSnake = (
         ),
         Math.floor(
             Math.floor(board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE
-        )
+        ),
+        DIR.RIGHT
     ]);
 
     for (let i = 0; i < initLength; i++) {
+        if (i === 0) {
+            initArray.push([
+                (board.clientWidth - BOX_SIZE) / 2 - (i + 0.5) * BOX_SIZE,
+                (board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE,
+                DIR.RIGHT
+            ]);
+            continue;
+        }
         initArray.push([
             (board.clientWidth - BOX_SIZE) / 2 - (i + 0.5) * BOX_SIZE,
             (board.clientHeight - BOX_SIZE) / 2 - 0.5 * BOX_SIZE

@@ -1,4 +1,5 @@
 import './Header.css';
+import { GiRattlesnake } from 'react-icons/gi';
 
 const Header = ({
     name,
@@ -8,10 +9,19 @@ const Header = ({
     gamePoints: number;
 }) => {
     return (
-        <header className="header-container">
-            <div> Snakey </div>
-            {name && <div>{`Points: ${gamePoints}`}</div>}
-            {name && <div>Hello, {name}</div>}
+        <header className="header-container animate__animated animate__fadeIn">
+            <div style={{ textShadow: '2px 2px #000' }}>
+                Snakey
+                <GiRattlesnake style={{ marginLeft: 10 }} />
+            </div>
+            {name && (
+                <div
+                    style={{ textShadow: '2px 2px #000' }}
+                >{`Points: ${gamePoints}`}</div>
+            )}
+            {name && (
+                <div style={{ textShadow: '2px 2px #000' }}>Hello, {name}</div>
+            )}
         </header>
     );
 };

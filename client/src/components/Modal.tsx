@@ -38,7 +38,7 @@ const Modal = ({
     if (!name || gameOver) {
         return (
             <div
-                className="modal-container"
+                className="modal-container "
                 tabIndex={0}
                 ref={gameOverRef}
                 onKeyUp={(e) => {
@@ -49,13 +49,16 @@ const Modal = ({
             >
                 {gameOver ? (
                     <>
-                        <div className="gameOver">
+                        <div className="gameOver animate__animated animate__fadeIn">
                             <Ranking gamePoints={gamePoints} name={name!} />
                             <strong>Press Space to Restart</strong>
                         </div>
                     </>
                 ) : (
-                    <form className="name-form" onSubmit={submitted}>
+                    <form
+                        className="name-form animate__animated animate__fadeIn animate__delay-2s"
+                        onSubmit={submitted}
+                    >
                         <input
                             ref={inputRef}
                             name="name"
