@@ -21,6 +21,9 @@ const Modal = ({
 }: ModalType) => {
     const submitted = (e: any) => {
         e.preventDefault();
+        if (e.target[0].value.trim().length < 1) {
+            return;
+        }
         setGameStart(true);
         setName(e.target[0].value.trim());
     };

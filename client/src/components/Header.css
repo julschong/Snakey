@@ -12,3 +12,7 @@
         rgba(55, 66, 57, 1) 100%
     );
 }
+
+.snake-logo {
+    filter: drop-shadow(2px 5px 2px rgb(0 0 0 / 0.4));
+}
