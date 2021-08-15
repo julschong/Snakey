@@ -15,12 +15,12 @@ Current progression is:
  - [x] Snake run through the Board and check border and body collision
  - [x] Snake extend by 1 block when eating an apple
  - [x] Apple gets randomly generated each time
- - [ ] GameOver Screen
- - [ ] Ranking Modal Page showing Backend highest scores and player names
+ - [x] GameOver Screen
+ - [x] Ranking Modal Page showing Backend highest scores and player names
  
  BackEnd:
- - [ ] Simple Express Server to serve API for player data access
- - [ ] Use Docker to host on AWS EC2 instance
+ - [x] Simple Express Server to serve API for player data access
+ - [x] Use Docker to host on AWS EC2 instance
 
 Current Progress:
 ![Snakey](https://user-images.githubusercontent.com/71372051/129150037-7918ae67-1884-44bc-8b19-b60a119078a2.gif)
