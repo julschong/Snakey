@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import './Modal.css';
+import Ranking from './Ranking';
 
 interface ModalType {
     name: string | null;
@@ -45,7 +46,10 @@ const Modal = ({
                 }}
             >
                 {gameOver ? (
-                    <div className="gameOver">Press Space to Restart</div>
+                    <>
+                        <Ranking />
+                        <div className="gameOver">Press Space to Restart</div>
+                    </>
                 ) : (
                     <form className="name-form" onSubmit={submitted}>
                         <input
