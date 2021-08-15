@@ -5,7 +5,7 @@ The End goal is a FullStack Application with FrontEnd hosted on Netlify and Back
 
 # Progress
 Snakey is now hosted on AWS
-Frontend: ![S3 link](http://snakey-s3.s3-website-us-west-1.amazonaws.com/)
+Frontend: [S3 link](http://snakey-s3.s3-website-us-west-1.amazonaws.com/)
 
 If you'd like to try it out locally, please clone this repo and run:
 ```
