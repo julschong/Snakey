@@ -1,0 +1,21 @@
+{
+  "name": "snakey",
+  "version": "1.0.0",
+  "description": "Snakey is the classic game Snake made using React and Typescript!",
+  "main": "index.js",
+  "scripts": {
+    "ci": "cd client && npm i && cd ../server && npm i",
+    "dev": "concurrently \"cd client && npm start\" \"cd server && npm run dev\"" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julschong/Snakey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julschong/Snakey/issues"
+  },
+  "homepage": "https://github.com/julschong/Snakey#readme"
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Ranking.css';
+import { BACKEND_DEV_URL } from '../util/helper';
 
 type UserData = {
     success: boolean;
@@ -23,16 +24,13 @@ const Ranking = ({
     const [data, setData] = useState<User[]>([]);
 
     useEffect(() => {
-        console.log(process.env.REACT_APP_BACKEND_URL);
-        axios
-            .get<UserData>(`${process.env.REACT_APP_BACKEND_URL}/score/top10`)
-            .then((res) => {
-                setData(res.data.data);
-                axios.post(
-                    `${process.env.REACT_APP_BACKEND_URL}/score/submit`,
-                    { name, score: gamePoints }
-                );
+        axios.get<UserData>(`${BACKEND_DEV_URL}/score/top10`).then((res) => {
+            setData(res.data.data);
+            axios.post(`${BACKEND_DEV_URL}/score/submit`, {
+                name,
+                score: gamePoints
             });
+        });
     }, [gamePoints, name]);
     return (
         <>
