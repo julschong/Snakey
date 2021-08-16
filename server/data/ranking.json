@@ -1,8 +1,28 @@
 {
   "ranks": [
     {
+      "name": "Julius",
+      "score": 34
+    },
+    {
+      "name": "Julius",
+      "score": 31
+    },
+    {
+      "name": "Julius",
+      "score": 8
+    },
+    {
       "name": "J",
-      "score": 1
+      "score": 4
+    },
+    {
+      "name": "J",
+      "score": 2
+    },
+    {
+      "name": "J",
+      "score": 2
     },
     {
       "name": "J",
@@ -14,31 +34,11 @@
     },
     {
       "name": "J",
-      "score": 0
+      "score": 1
     },
     {
-      "name": "J",
-      "score": 0
-    },
-    {
-      "name": "J",
-      "score": 0
-    },
-    {
-      "name": "J",
-      "score": 0
-    },
-    {
-      "name": "J",
-      "score": 0
-    },
-    {
-      "name": "J",
-      "score": 0
-    },
-    {
-      "name": "J",
-      "score": 0
+      "name": "Julius",
+      "score": 1
     }
   ]
 }

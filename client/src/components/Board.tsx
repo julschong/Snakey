@@ -30,6 +30,7 @@ const Board = ({
     const [snakePoints, setSnake] = useState<Snake>([]);
     const [apple, setApple] = useState<Apple>([]);
     const [inputDisabled, setInputDisabled] = useState<boolean>(false);
+    const [delay, setDelay] = useState(DELAY);
 
     function keyPressed(e: any) {
         if (!inputDisabled) {
@@ -47,7 +48,12 @@ const Board = ({
         if (gameStart) {
             boardRef.current!.focus();
         }
-    }, [gameStart, gameOver]);
+        if (!gameOver) {
+            setDir(DIR.DOWN);
+            setGameOver(false);
+            initSnake(10, boardRef.current!, setHead, setSnake, setGamePoints);
+        }
+    }, [gameStart, gameOver, setGamePoints, setGameOver]);
 
     useInterval(() => {
         if (gameStart && !gameOver) {
@@ -62,7 +68,8 @@ const Board = ({
                 apple,
                 setApple,
                 setGamePoints,
-                setGameOver
+                setGameOver,
+                setDelay
             );
 
             // Disable input to reduce input delay when same key is repeatedly pressed
@@ -70,7 +77,7 @@ const Board = ({
                 setInputDisabled(false);
             }
         }
-    }, DELAY);
+    }, delay);
 
     return (
         <div

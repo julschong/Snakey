@@ -1,6 +1,13 @@
 import { KeyboardEvent } from 'react';
 import { Apple, Snake, SnakePoint } from './../type.d';
-import { BOX_COUNTX, BOX_COUNTY, BOX_SIZE, DIR, SPEED } from '../config/init';
+import {
+    BOX_COUNTX,
+    BOX_COUNTY,
+    BOX_SIZE,
+    DELAY,
+    DIR,
+    SPEED
+} from '../config/init';
 
 const borderCheck = (
     head: SnakePoint,
@@ -43,10 +50,12 @@ export const moveTo = (
     apple: Apple,
     setApple: Function,
     setGamePoints: Function,
-    setGameOver: Function
+    setGameOver: Function,
+    setDelay: Function
 ): void => {
     if (borderCheck(head, board, snake)) {
         setGameOver(true);
+        setDelay(DELAY);
         return setDir(DIR.STOP);
     }
 
@@ -71,7 +80,8 @@ export const moveTo = (
             apple,
             setApple,
             board,
-            setGamePoints
+            setGamePoints,
+            setDelay
         );
     }
 };
@@ -83,12 +93,14 @@ const updateSnake = (
     apple: Apple,
     setApple: Function,
     board: HTMLDivElement,
-    setGamePoints: Function
+    setGamePoints: Function,
+    setDelay: Function
 ): void => {
     if (ateApple(head, apple)) {
         setGamePoints((score: number) => score + 1);
         setSnake([head, ...snake]);
         setApple(generateRandomApple(board));
+        setDelay((d: number) => Math.max(0, d - 2));
         return;
     }
     setSnake([head, ...snake.slice(0, snake.length - 1)]);
