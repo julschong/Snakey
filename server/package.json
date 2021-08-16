@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "watch-tsc": "npx tsc --watch",
-    "watch-nodemon": "npx nodemon ./dist/index.js",
+    "watch-nodemon": "npx nodemon ./dist/index.js --ignore ./data/",
     "dev": "npx concurrently \"npm run watch-tsc\" \"npm run watch-nodemon\""
   },
   "keywords": [],
