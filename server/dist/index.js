@@ -10,16 +10,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config({});
 var app = express_1.default();
 app.use(cors_1.default({ origin: '*' }));
 app.use(express_1.default.json());
-var user = [
-    { name: 'Julius', score: 10 },
-    { name: 'Marb', score: 20 },
-    { name: 'Foosh', score: 20 },
-    { name: 'Goop', score: 30 },
-    { name: 'Christine', score: 12 }
-];
+var user = [];
 app.get('/score/top10', function (req, res) {
     res.status(200).json({
         sucess: true,
@@ -35,8 +31,9 @@ app.post('/score/submit', function (req, res) {
         data: __spreadArray([], user).sort(function (a, b) { return b.score - a.score; }).slice(0, 10)
     });
 });
-app.listen(3003, function () {
+var port = process.env.PORT || 3003;
+app.listen(port, function () {
     // eslint-disable-next-line no-console
-    console.log('listening on 3003');
+    console.log("listening on " + port);
 });
 //# sourceMappingURL=index.js.map

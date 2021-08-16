@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 
+import dotenv from 'dotenv';
+
+dotenv.config({});
 const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
@@ -10,13 +13,7 @@ type Score = {
     score: number;
 };
 
-const user: Score[] = [
-    { name: 'Julius', score: 10 },
-    { name: 'Marb', score: 20 },
-    { name: 'Foosh', score: 20 },
-    { name: 'Goop', score: 30 },
-    { name: 'Christine', score: 12 }
-];
+const user: Score[] = [];
 
 app.get('/score/top10', (req, res) => {
     res.status(200).json({
@@ -36,7 +33,9 @@ app.post('/score/submit', (req, res) => {
     });
 });
 
-app.listen(3003, () => {
+const port = process.env.PORT || 3003;
+
+app.listen(port, () => {
     // eslint-disable-next-line no-console
-    console.log('listening on 3003');
+    console.log(`listening on ${port}`);
 });
