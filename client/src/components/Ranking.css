@@ -2,6 +2,7 @@
     font-weight: 900;
     border-bottom: 3px solid black;
     margin-bottom: 20px;
+    font-family: 'Sora', sans-serif;
 }
 
 .ranked-score {
@@ -10,4 +11,6 @@
     padding-inline: 40px;
     align-items: center;
     width: 100%;
+    font-size: 70%;
+    font-family: 'Sora', sans-serif;
 }
