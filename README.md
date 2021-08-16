@@ -1,16 +1,27 @@
 # Intro
 Snakey is the classic game Snake made using React and Typescript!
 
-The End goal is a FullStack Application with FrontEnd hosted on Netlify and Backend to use Docker to run on AWS EC2
+FullStack Application with FrontEnd statically hosted on AWS S3 Bucket and Backend with Docker running on AWS EC2
 
-# Progress
+# Try it yourself!
 Snakey is now hosted on AWS
 Frontend: [S3 link](http://snakey-s3.s3-website-us-west-1.amazonaws.com/)
 
 If you'd like to try it out locally, please clone this repo and run:
 ```
-cd client && npm i
+npm run ci
 ```
+Make sure you have concurrently, nodemon, and typescript installed globally
+if not, please run
+```
+npm i -g concurrently nodemon typescript
+```
+
+After everything is installed, you can run this to start dev client and server
+```
+npm run dev
+```
+
 Current progression is:
  - [x] Start Screen Modal to enter Name
  - [x] Board with Snake and Apple Displayed
