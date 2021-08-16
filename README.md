@@ -35,8 +35,8 @@ Current progression is:
  - [x] Simple Express Server to serve API for player data access
  - [x] Use Docker to host on AWS EC2 instance
 
-Current Progress:
-![Snakey](https://user-images.githubusercontent.com/71372051/129150037-7918ae67-1884-44bc-8b19-b60a119078a2.gif)
+![Snakey](https://user-images.githubusercontent.com/71372051/129515321-093b91e2-f174-4096-985f-7c8627623412.gif)
+
 
 
 
