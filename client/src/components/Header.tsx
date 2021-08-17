@@ -19,8 +19,23 @@ const Header = ({
             </div>
             {name && (
                 <div
-                    style={{ textShadow: '2px 2px #000' }}
-                >{`Points: ${gamePoints}`}</div>
+                    style={{
+                        display: 'flex',
+                        textShadow: '2px 2px #000',
+                        alignItems: 'center'
+                    }}
+                >
+                    <img
+                        height="100%"
+                        src="./asset/apple.svg"
+                        style={{
+                            marginRight: '20px',
+                            transform: 'translateY(-5px)'
+                        }}
+                        alt="apple-score"
+                    />
+                    {gamePoints}
+                </div>
             )}
             {name && (
                 <div style={{ textShadow: '2px 2px #000' }}>Hello, {name}</div>

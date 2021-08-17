@@ -27,7 +27,7 @@ const Ranking = ({
         axios.get<UserData>(`${BACKEND_DEV_URL}/score/top10`).then((res) => {
             setData(res.data.data);
             axios.post(`${BACKEND_DEV_URL}/score/submit`, {
-                name,
+                name: name.length > 10 ? name.slice(0, 9) + '...' : name,
                 score: gamePoints
             });
         });

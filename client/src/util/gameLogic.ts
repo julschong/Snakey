@@ -99,7 +99,7 @@ const updateSnake = (
     if (ateApple(head, apple)) {
         setGamePoints((score: number) => score + 1);
         setSnake([head, ...snake]);
-        setApple(generateRandomApple(board));
+        setApple(generateRandomApple(board, snake));
         setDelay((d: number) => Math.max(0, d - 2));
         return;
     }
@@ -175,9 +175,25 @@ export const keyInputActions = (
     }
 };
 
-export const generateRandomApple = (board: HTMLDivElement): Apple => {
-    const x = Math.floor(Math.random() * BOX_COUNTX) * BOX_SIZE;
-    const y = Math.floor(Math.random() * BOX_COUNTY) * BOX_SIZE;
+export const generateRandomApple = (
+    board: HTMLDivElement,
+    snake: Snake
+): Apple => {
+    let x;
+    let y;
+    let overlap = false;
+
+    do {
+        x = Math.floor(Math.random() * BOX_COUNTX) * BOX_SIZE;
+        y = Math.floor(Math.random() * BOX_COUNTY) * BOX_SIZE;
+        for (let i = 0; i < snake.length; i++) {
+            if (x === snake[i][0] && y === snake[i][1]) {
+                overlap = true;
+                break;
+            }
+            overlap = false;
+        }
+    } while (overlap);
 
     return [x, y, generateRandomColor()];
 };

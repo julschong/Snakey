@@ -1,7 +1,35 @@
 .board {
+    --light-green: rgb(115, 224, 111);
+    --dark-green: rgb(144, 250, 140);
     position: relative;
+    background-image: linear-gradient(
+            45deg,
+            var(--light-green) 25%,
+            transparent 25%
+        ),
+        linear-gradient(45deg, transparent 75%, var(--light-green) 75%),
+        linear-gradient(45deg, transparent 75%, var(--light-green) 75%),
+        linear-gradient(45deg, var(--light-green) 25%, var(--dark-green) 25%);
+
+    background-size: 100px 100px;
+
+    background-position: 0 0, 0 0, -50px -50px, 50px 50px;
+
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.6), -3px -3px 10px rgb(0, 0, 0, 0.6);
 }
 
 *:focus {
     outline: none;
+}
+
+main {
+    flex-grow: 1;
+    background-image: url('./image/forest.jpg');
+    background-size: contain;
+}
+
+#apple {
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
 }
