@@ -1,5 +1,6 @@
 import './Header.css';
 import { GiRattlesnake } from 'react-icons/gi';
+import AppleSVG from '../asset/apple.svg';
 
 const Header = ({
     name,
@@ -27,7 +28,7 @@ const Header = ({
                 >
                     <img
                         height="100%"
-                        src="./asset/apple.svg"
+                        src={AppleSVG}
                         style={{
                             marginRight: '20px',
                             transform: 'translateY(-5px)'

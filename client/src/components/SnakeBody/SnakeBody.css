@@ -1,0 +1,20 @@
+.snake-segment {
+    background-color: #00ffaa;
+    position: absolute;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 10%;
+}
+
+.snake-head {
+    background-color: #00ffaa;
+    position: absolute;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), -2px -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.snake-segment:nth-last-child(2) {
+    transform: scale(0.8);
+}
+
+.snake-segment:last-child {
+    transform: scale(0.7);
+}
