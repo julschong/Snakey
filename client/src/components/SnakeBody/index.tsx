@@ -14,7 +14,7 @@ const SnakeBody = ({ snakePoints }: SnakeBodyType) => {
                 return (
                     <div
                         key={`snake-body-${x}-${y}-${i}`}
-                        className="snake-segment"
+                        className={i === 0 ? 'snake-head' : 'snake-segment'}
                         style={{
                             width: BOX_SIZE,
                             height: BOX_SIZE,
