@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import './Modal.css';
-import Ranking from './Ranking';
+import Ranking from '../Ranking';
 
 interface ModalType {
     name: string | null;

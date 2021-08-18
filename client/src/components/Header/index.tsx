@@ -1,6 +1,6 @@
 import './Header.css';
 import { GiRattlesnake } from 'react-icons/gi';
-import AppleSVG from '../asset/apple.svg';
+import AppleSVG from '../../asset/apple.svg';
 
 const Header = ({
     name,

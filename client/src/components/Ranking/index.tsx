@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Ranking.css';
-import { BACKEND_DEV_URL } from '../util/helper';
+import { BACKEND_DEV_URL } from '../../util/helper';
 
 type UserData = {
     success: boolean;

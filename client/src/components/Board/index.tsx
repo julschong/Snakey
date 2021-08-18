@@ -1,18 +1,18 @@
 import './Board.css';
 import { useEffect, useState, useRef } from 'react';
-import { useInterval } from './../util/useInterval';
+import { useInterval } from '../../util/useInterval';
 import {
     initSnake,
     moveTo,
     keyInputActions,
     generateRandomApple
-} from './../util/gameLogic';
-import { Apple, Snake, SnakePoint } from '../type';
-import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../config/init';
-import { BORDER_SIZE, BOX_COUNTY } from './../config/init';
-import background from '../asset/forest.jpg';
-import AppleFood from './AppleFood/index';
-import SnakeBody from './SnakeBody/index';
+} from '../../util/gameLogic';
+import { Apple, Snake, SnakePoint } from '../../type';
+import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../../config/init';
+import { BORDER_SIZE, BOX_COUNTY } from '../../config/init';
+import background from '../../asset/forest.jpg';
+import AppleFood from '../AppleFood';
+import SnakeBody from '../SnakeBody';
 
 const Board = ({
     gameStart,
