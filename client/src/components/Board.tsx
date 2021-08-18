@@ -10,7 +10,9 @@ import {
 import { Apple, Snake, SnakePoint } from '../type';
 import { BOX_COUNTX, BOX_SIZE, DELAY, DIR } from '../config/init';
 import { BORDER_SIZE, BOX_COUNTY } from './../config/init';
-import { headStyle } from './../util/snakeStyle';
+import background from '../asset/forest.jpg';
+import AppleFood from './AppleFood/index';
+import SnakeBody from './SnakeBody/index';
 
 const Board = ({
     gameStart,
@@ -81,7 +83,7 @@ const Board = ({
     }, delay);
 
     return (
-        <main>
+        <main style={{ backgroundImage: `url(${background})` }}>
             <div
                 className="board animate__animated animate__fadeIn animate__delay-1s"
                 style={{
@@ -107,40 +109,9 @@ const Board = ({
                 }}
             >
                 {/* Draws an Apple */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        width: BOX_SIZE,
-                        height: BOX_SIZE,
-                        left: apple[0],
-                        top: apple[1]
-                    }}
-                >
-                    <img
-                        id="apple"
-                        src="./asset/apple.svg"
-                        alt="apple-food"
-                    ></img>
-                </div>
-
+                <AppleFood apple={apple} />
                 {/* Below draws the snakes body onto the board */}
-                {snakePoints.map(([x, y, direction], i) => {
-                    return (
-                        <div
-                            key={`snake-body-${x}-${y}-${i}`}
-                            style={{
-                                backgroundColor: '#00FFAA',
-                                border: '1px solid black',
-                                width: BOX_SIZE,
-                                height: BOX_SIZE,
-                                position: 'absolute',
-                                borderRadius: headStyle(direction!, i),
-                                left: x,
-                                top: y
-                            }}
-                        ></div>
-                    );
-                })}
+                <SnakeBody snakePoints={snakePoints} />
             </div>
         </main>
     );

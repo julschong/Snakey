@@ -26,10 +26,5 @@
 
 main {
     flex-grow: 1;
-    background-image: url('./image/forest.jpg');
     background-size: contain;
-}
-
-#apple {
-    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4));
 }
