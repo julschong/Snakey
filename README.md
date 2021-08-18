@@ -1,4 +1,4 @@
-# Intro
+# Description
 Snakey is the classic game Snake made using React and Typescript!
 
 FullStack Application with FrontEnd statically hosted on AWS S3 Bucket and Backend with Docker running on AWS EC2
